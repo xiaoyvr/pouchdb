@@ -33,14 +33,6 @@ for pkg in $(ls packages/node_modules); do
     continue
   fi
   cd packages/node_modules/$pkg
-  echo "Publishing $pkg..."
-  if [ ! -z $DRY_RUN ]; then
-    echo "Dry run, not publishing"
-  elif [ ! -z $BETA ]; then
-    npm publish --tag beta
-  else
-    npm publish
-  fi
   cd -
 done
 
@@ -57,7 +49,7 @@ if [ -z $DRY_RUN ]; then
  if [ -z $BETA ]; then
     # Tag and push
     git tag $VERSION
-    git push --tags git@github.com:pouchdb/pouchdb.git $VERSION
+    git push --tags https://github.com/xiaoyvr/pouchdb $VERSION
 
     # Cleanup
     git checkout $SOURCE_DIR
